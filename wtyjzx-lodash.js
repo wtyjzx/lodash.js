@@ -837,10 +837,93 @@ var wtyjzx = {
 
    }
 
-   
-   
+   defaults : function(object,...source){
+   	source.forEach((value) => {
+   		if (nosign.isObject(value)) {
+   			for(!(let key in object)){
+   				object[key] = value[key]
+   				}
+   			}
+   		}
+   	})
+   	return object
+   }
+
+   forIn : function(object, iteratee){
+   	for(let key in object){
+   		iteratee(object[key],key,object)
+   	}
+   	return object
+   	}
 
 
+
+   	forInRight : function(object,iteratee){
+   		let result=[]
+   		for(let value in object){
+   			result.unshift(value)
+   		}
+   		for(let key of result){
+   			iteratee(result[key],key,object)
+   		}
+   		return object
+   	}
+
+   	forOwn : function(object,iteratee){
+   		for(let key in object){
+   			if (object.hasOwnProperty(key)) {
+   				iteratee(object[key],key,object)
+   			}
+   		}
+   		return object
+   	}
+   
+   	forOwnRight : function(object,iteratee){
+   		let keys = obj.keys(object).reverse()
+   		for(key in keys){
+   			iteratee(keys[key],key,object)
+   		}
+   		return object
+   	}
+
+   	functions : function(object){
+   		return keys(object).filter(key => typeof object[key] === 'function' )
+   	}
+
+   	functionsIn : function(object){
+   		let result = []
+   		for(let key in object){
+   			if (this.isFunction(object[key])) {
+   				result.push(key)
+   			}
+   		}
+   		return result
+   	}
+
+   	get : function(object, path, defaultValue){
+   		if (!Array.isArray(path)) {
+   			path = this.toPath(path)
+   		}
+   		for(let value in path){
+   			object = object[path[value]]
+   			if (object === undefined) {
+   				return defaultValue
+   			}
+   		}
+   		return object
+   	}
+
+
+   	invert : function(object){
+   		let entry = Object.entries(object)
+   		let result ={}
+   		for(let [key,value] of entries){
+   			result[value] = key
+   		}
+   		return result
+   	}
+
+   	
     isPrime : function(n) {
    	if (n === 1) {
     return false
@@ -855,5 +938,5 @@ var wtyjzx = {
 	}
 
    
-
+	
 
