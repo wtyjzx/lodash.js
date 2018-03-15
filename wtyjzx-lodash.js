@@ -944,17 +944,16 @@ var wtyjzx = {
 	}
 
 	mergeWith: function(object, sources, customizer) {
-
+		
 	}
 
-
+	
 
 	omit: function(object, paths) {
-		props = falttenDeep(props)
-		let
+		
 	}
-
-
+	
+	
 
 	isPrime: function(n) {
 		if (n === 1) {
